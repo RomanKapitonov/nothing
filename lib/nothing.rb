@@ -1,28 +1,53 @@
 module Nothing
   # Natural numbers
 
-  # ZERO  =
-  # ONE   =
-  # TWO   =
-  # THREE =
+  # λf.(λz.z)
+  ZERO  = -> f { -> z { z } }
+  # λf.(λz.f(z))
+  ONE   = -> f { -> z { f[z] } }
+  # λf.(λz.f(f(z)))
+  TWO   = -> f { -> z { f[f[z]] } }
+  # λf.(λz.f(f(f(z))))
+  THREE = -> f { -> z { f[f[f[z]]] } }
 
-  # TIMES     =
-  # INCREMENT =
-  # ADD       =
-  # MULTIPLY  =
-  # POWER     =
-  # DECREMENT =
-  # SUBTRACT  =
+  # λn.(λf.(λx) nfx)
+  TIMES     = -> n { -> f { -> x { n[f][x] } } }
+  # λw.(λy.(λx.y(wyx)))
+  INCREMENT = -> w { -> y { -> x { y[w[y][x]] } } }
+  # λn.λm.n(λw.(λy.(λx.y(wyx))))m
+  ADD       = -> a { -> b { a[INCREMENT][b] } }
+  # λx.λy.λz.x(yz)
+  MULTIPLY  = -> x { -> y { -> z { x[y[z]] } } }
+  # λx.λe.ex
+  POWER     = -> x { -> e { e[x] } }
+  # λn.λf.λx.n (λg.λh.h (g f)) (λu.x) (λu.u)
+  DECREMENT = -> n { -> f { -> x { n[-> g { -> h { h[g[f]] } }][-> a { x }][-> b { b }] } } }
+  # λa.λb.a DECREMENT b
+  SUBTRACT  = -> a { -> b { a[DECREMENT[b]] } }
 
   # Booleans
 
-  # TRUE  =
-  # FALSE =
-  # IF    =
+  # λx.(λy.x)
+  TRUE  = -> x { -> y { x } }
+  # λx.(λy.y)
+  FALSE = -> x { -> y { y } }
+  # λx.x
+  IF    = -> b { b }
 
-  # NOT =
-  # AND =
-  # OR  =
+  # λx.(x(λa.λb.b)(λc.λd.c))
+  NOT = -> x { IF[x][FALSE][TRUE] }
+  # λx.λy.xy(λab.b)
+  AND = -> x {
+    -> y {
+      IF[x][IF[y]][FALSE]
+    }
+  }
+  # λx.λy.x(λab.a)y
+  OR  = -> x {
+    -> y {
+      IF[x][TRUE][IF[y]]
+    }
+  }
 
   # Natural numbers with booleans
 

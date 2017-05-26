@@ -3,18 +3,18 @@ require 'spec_helper'
 module Nothing
   describe Nothing do
     describe 'natural numbers' do
-      specify { pending { ZERO.should represent 0 } }
-      specify { pending { ONE.should represent 1 } }
-      specify { pending { TWO.should represent 2 } }
-      specify { pending { THREE.should represent 3 } }
+      specify { ZERO.should represent 0 }
+      specify { ONE.should represent 1 }
+      specify { TWO.should represent 2 }
+      specify { THREE.should represent 3 }
 
-      specify { pending { TIMES[representation_of 3][-> s { s + 'o' }]['hell'].should == 'hellooo' } }
-      specify { pending { INCREMENT[representation_of 2].should represent 2 + 1 } }
-      specify { pending { ADD[representation_of 2][representation_of 3].should represent 2 + 3 } }
-      specify { pending { MULTIPLY[representation_of 2][representation_of 3].should represent 2 * 3 } }
-      specify { pending { POWER[representation_of 2][representation_of 3].should represent 2 ** 3 } }
-      specify { pending { DECREMENT[representation_of 3].should represent 3 - 1 } }
-      specify { pending { SUBTRACT[representation_of 3][representation_of 2].should represent 3 - 2 } }
+      specify { TIMES[representation_of 3][-> s { s + 'o' }]['hell'].should == 'hellooo' }
+      specify { INCREMENT[representation_of 2].should represent 2 + 1 }
+      specify { ADD[representation_of 2][representation_of 3].should represent 2 + 3 }
+      specify { MULTIPLY[representation_of 2][representation_of 3].should represent 2 * 3 }
+      specify { POWER[representation_of 2][representation_of 3].should represent 2 ** 3 }
+      specify { DECREMENT[representation_of 3].should represent 3 - 1 }
+      specify { SUBTRACT[representation_of 3][representation_of 2].should represent 3 - 2 }
 
       context 'with booleans' do
         (0..3).each do |n|
@@ -45,19 +45,19 @@ module Nothing
     end
 
     describe 'booleans' do
-      specify { pending { TRUE.should represent true } }
-      specify { pending { FALSE.should represent false } }
+      specify { TRUE.should represent true }
+      specify { FALSE.should represent false }
 
       let(:foo) { Object.new }
       let(:bar) { Object.new }
 
       [true, false].each do |b|
-        specify { pending { IF[representation_of b][foo][bar].should equal(if b then foo else bar end) } }
-        specify { pending { NOT[representation_of b].should represent !b } }
+        specify { IF[representation_of b][foo][bar].should equal(if b then foo else bar end) }
+        specify { NOT[representation_of b].should represent !b }
 
         [true, false].each do |a|
-          specify { pending { AND[representation_of a][representation_of b].should represent a && b } }
-          specify { pending { OR[representation_of a][representation_of b].should represent a || b } }
+          specify { AND[representation_of a][representation_of b].should represent a && b }
+          specify { OR[representation_of a][representation_of b].should represent a || b }
         end
       end
     end

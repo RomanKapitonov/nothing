@@ -1,3 +1,4 @@
+require 'pry'
 require 'nothing'
 require 'support/pair'
 require 'support/helpers'
